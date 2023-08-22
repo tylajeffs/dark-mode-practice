@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react'
 import './App.css';
 
 function App() {
+
+  //set up light mode and dark mode state
+  const [mode, setMode] = useState('light');
+
+  //give the mode options to toggle
+  const toggleMode = () => {
+    if (mode === 'light') {
+      setMode('dark')
+    } else {
+      setMode('light')
+    }
+  };
+
+  //actually use the toggle
+  useEffect(() => {
+    document.body.className = mode;
+  }, [mode]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={'App ${mode}'}>
+      <button onClick={toggleMode}>Change mode</button>
+      <h1>Hello World</h1>
     </div>
+
+
   );
 }
 
